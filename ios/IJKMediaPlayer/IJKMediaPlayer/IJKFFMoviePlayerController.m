@@ -47,10 +47,6 @@ static const char *kIJKFFRequiredFFmpegVersion = "n2.7-24-g58b28fc";
     IJKSDLGLView *_glView;
     IJKFFMoviePlayerMessagePool *_msgPool;
 
-    NSInteger _videoWidth;
-    NSInteger _videoHeight;
-    NSInteger _sampleAspectRatioNumerator;
-    NSInteger _sampleAspectRatioDenominator;
 
     BOOL      _seeking;
     NSInteger _bufferingTime;
@@ -83,6 +79,9 @@ static const char *kIJKFFRequiredFFmpegVersion = "n2.7-24-g58b28fc";
 @synthesize mediaMeta = _mediaMeta;
 @synthesize videoMeta = _videoMeta;
 @synthesize audioMeta = _audioMeta;
+
+@synthesize videoSize = _videoSize;
+@synthesize sampleAspectRatio = _sampleAspectRatio;
 
 @synthesize allowsMediaAirPlay = _allowsMediaAirPlay;
 @synthesize airPlayMediaActive = _airPlayMediaActive;
@@ -659,6 +658,20 @@ inline static void fillMetaInternal(NSMutableDictionary *meta, IjkMediaMeta *raw
                                         _fpsInMeta = ((CGFloat)(fps_num)) / fps_den;
                                         NSLog(@"fps in meta %f\n", _fpsInMeta);
                                     }
+                                    int64_t sar_num = ijkmeta_get_int64_l(streamRawMeta, IJKM_KEY_SAR_NUM, 0);
+                                    int64_t sar_den = ijkmeta_get_int64_l(streamRawMeta, IJKM_KEY_SAR_DEN, 0);
+                                    if (sar_num > 0 && sar_den > 0) {
+                                        _sampleAspectRatio.numerator = sar_num;
+                                        _sampleAspectRatio.denominator = sar_den;
+                                        NSLog(@"SAR (%ld:%ld)\n", _sampleAspectRatio.numerator, _sampleAspectRatio.denominator);
+                                    }
+                                    int64_t width = ijkmeta_get_int64_l(streamRawMeta, IJKM_KEY_WIDTH, 0);
+                                    int64_t height = ijkmeta_get_int64_l(streamRawMeta, IJKM_KEY_HEIGHT, 0);
+                                    if (width > 0 && height > 0) {
+                                        _videoSize.width = width;
+                                        _videoSize.height = height;
+                                        NSLog(@"video size in meta (%ld,%ld)\n", _videoSize.width, _videoSize.height);
+                                    }
                                 }
 
                             } else if (0 == strcmp(type, IJKM_VAL_TYPE__AUDIO)) {
@@ -711,17 +724,17 @@ inline static void fillMetaInternal(NSMutableDictionary *meta, IjkMediaMeta *raw
         case FFP_MSG_VIDEO_SIZE_CHANGED:
             NSLog(@"FFP_MSG_VIDEO_SIZE_CHANGED: %d, %d", avmsg->arg1, avmsg->arg2);
             if (avmsg->arg1 > 0)
-                _videoWidth = avmsg->arg1;
+                _videoSize.width = avmsg->arg1;
             if (avmsg->arg2 > 0)
-                _videoHeight = avmsg->arg2;
+                _videoSize.height = avmsg->arg2;
             // TODO: notify size changed
             break;
         case FFP_MSG_SAR_CHANGED:
             NSLog(@"FFP_MSG_SAR_CHANGED: %d, %d", avmsg->arg1, avmsg->arg2);
             if (avmsg->arg1 > 0)
-                _sampleAspectRatioNumerator = avmsg->arg1;
+                _sampleAspectRatio.numerator = avmsg->arg1;
             if (avmsg->arg2 > 0)
-                _sampleAspectRatioDenominator = avmsg->arg2;
+                _sampleAspectRatio.denominator = avmsg->arg2;
             break;
         case FFP_MSG_BUFFERING_START: {
             NSLog(@"FFP_MSG_BUFFERING_START:");

@@ -22,6 +22,8 @@
 
 #import "IJKMediaPlayback.h"
 #import "IJKFFOptions.h"
+#import "IJKFraction.h"
+#import "IJKIntSize.h"
 
 // media meta
 #define k_IJKM_KEY_FORMAT         @"format"
@@ -102,6 +104,8 @@ typedef enum IJKLogLevel {
 @property(nonatomic, readonly, copy) NSDictionary *mediaMeta;
 @property(nonatomic, readonly, copy) NSDictionary *videoMeta;
 @property(nonatomic, readonly, copy) NSDictionary *audioMeta;
+@property(nonatomic, readonly) IJKIntSize videoSize;
+@property(nonatomic, readonly) IJKFraction sampleAspectRatio;
 
 - (void)setOptionValue:(NSString *)value
                 forKey:(NSString *)key

@@ -13,6 +13,12 @@
 		454316281A66493700676070 /* ffpipenode_ios_videotoolbox_vout.m in Sources */ = {isa = PBXBuildFile; fileRef = 454316251A66493700676070 /* ffpipenode_ios_videotoolbox_vout.m */; };
 		4543162B1A66497900676070 /* IJKVideoToolBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543162A1A66497900676070 /* IJKVideoToolBox.m */; };
 		45DB4AAC1A5D52AE005CAD41 /* ijksdl_vout_overlay_videotoolbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DB4AA81A5D52AE005CAD41 /* ijksdl_vout_overlay_videotoolbox.m */; };
+		580496E01B83FE12008825A2 /* IJKFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 580496DD1B83FE12008825A2 /* IJKFraction.m */; };
+		580496E11B83FE12008825A2 /* IJKIntSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 580496DF1B83FE12008825A2 /* IJKIntSize.m */; };
+		580496E21B83FE2E008825A2 /* IJKFraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 580496DC1B83FE12008825A2 /* IJKFraction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		580496E31B83FE2E008825A2 /* IJKIntSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 580496DE1B83FE12008825A2 /* IJKIntSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		580496E41B83FE4A008825A2 /* IJKFraction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 580496DC1B83FE12008825A2 /* IJKFraction.h */; };
+		580496E51B83FE4A008825A2 /* IJKIntSize.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 580496DE1B83FE12008825A2 /* IJKIntSize.h */; };
 		E607FFE01B7B60F9005F11A6 /* IJKDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E607FFDF1B7B60F9005F11A6 /* IJKDeviceModel.m */; };
 		E607FFE11B7B62E3005F11A6 /* IJKDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E607FFDF1B7B60F9005F11A6 /* IJKDeviceModel.m */; };
 		E62139BE180FA89B00553533 /* IJKFFOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62139BD180FA89A00553533 /* IJKFFOptions.m */; };
@@ -153,6 +159,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				580496E41B83FE4A008825A2 /* IJKFraction.h in CopyFiles */,
+				580496E51B83FE4A008825A2 /* IJKIntSize.h in CopyFiles */,
 				E67C4E0A19D2BFF100415CEE /* IJKAVMoviePlayerController.h in CopyFiles */,
 				E672D6F418D345C100C51FF9 /* IJKMediaModule.h in CopyFiles */,
 				E62139BF180FAE5F00553533 /* IJKFFOptions.h in CopyFiles */,
@@ -178,6 +186,10 @@
 		4543162A1A66497900676070 /* IJKVideoToolBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJKVideoToolBox.m; path = ijkmedia/ijkplayer/ios/pipeline/IJKVideoToolBox.m; sourceTree = "<group>"; };
 		45DB4AA71A5D52AE005CAD41 /* ijksdl_vout_overlay_videotoolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_vout_overlay_videotoolbox.h; sourceTree = "<group>"; };
 		45DB4AA81A5D52AE005CAD41 /* ijksdl_vout_overlay_videotoolbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ijksdl_vout_overlay_videotoolbox.m; sourceTree = "<group>"; };
+		580496DC1B83FE12008825A2 /* IJKFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJKFraction.h; sourceTree = "<group>"; };
+		580496DD1B83FE12008825A2 /* IJKFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJKFraction.m; sourceTree = "<group>"; };
+		580496DE1B83FE12008825A2 /* IJKIntSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJKIntSize.h; sourceTree = "<group>"; };
+		580496DF1B83FE12008825A2 /* IJKIntSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJKIntSize.m; sourceTree = "<group>"; };
 		E607FFDE1B7B60F9005F11A6 /* IJKDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJKDeviceModel.h; path = IJKMediaPlayer/IJKDeviceModel.h; sourceTree = "<group>"; };
 		E607FFDF1B7B60F9005F11A6 /* IJKDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJKDeviceModel.m; path = IJKMediaPlayer/IJKDeviceModel.m; sourceTree = "<group>"; };
 		E62139BC180FA89A00553533 /* IJKFFOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJKFFOptions.h; sourceTree = "<group>"; };
@@ -508,6 +520,10 @@
 				E6716E4D1807EA5000B3FBC1 /* IJKFFMrl.m */,
 				E62139BC180FA89A00553533 /* IJKFFOptions.h */,
 				E62139BD180FA89A00553533 /* IJKFFOptions.m */,
+				580496DC1B83FE12008825A2 /* IJKFraction.h */,
+				580496DD1B83FE12008825A2 /* IJKFraction.m */,
+				580496DE1B83FE12008825A2 /* IJKIntSize.h */,
+				580496DF1B83FE12008825A2 /* IJKIntSize.m */,
 				E6903FCC17EAFC6100CFD954 /* ijkmedia */,
 				E6903EBF17EAF6C500CFD954 /* Supporting Files */,
 			);
@@ -710,6 +726,8 @@
 				E654EAE71B6B295200B0F2D0 /* IJKMediaPlayback.h in Headers */,
 				E654EAED1B6B29C100B0F2D0 /* IJKMediaPlayer.h in Headers */,
 				E654EAE91B6B295200B0F2D0 /* IJKMPMoviePlayerController.h in Headers */,
+				580496E21B83FE2E008825A2 /* IJKFraction.h in Headers */,
+				580496E31B83FE2E008825A2 /* IJKIntSize.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,10 +953,12 @@
 				E67C4E0519D15B3200415CEE /* IJKAVPlayerLayerView.m in Sources */,
 				E6F727C217F7C9BA0043623F /* IJKMediaPlayback.m in Sources */,
 				E6EE92BA1878230C009EAB56 /* ijksdl_vout_ios_gles2.m in Sources */,
+				580496E11B83FE12008825A2 /* IJKIntSize.m in Sources */,
 				E6716E4B1807E5FC00B3FBC1 /* IJKMediaUtils.m in Sources */,
 				E6716E4E1807EA5000B3FBC1 /* IJKFFMrl.m in Sources */,
 				454316281A66493700676070 /* ffpipenode_ios_videotoolbox_vout.m in Sources */,
 				E67B91B91A3801E600717EA9 /* ffpipenode_ffplay_vdec.c in Sources */,
+				580496E01B83FE12008825A2 /* IJKFraction.m in Sources */,
 				451103131A5CE36A00337D24 /* IJKSDLGLRenderNV12.m in Sources */,
 				E62139BE180FA89B00553533 /* IJKFFOptions.m in Sources */,
 				454316261A66493700676070 /* ffpipeline_ios.c in Sources */,
