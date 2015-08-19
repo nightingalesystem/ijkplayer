@@ -36,9 +36,6 @@ static const char *kIJKFFRequiredFFmpegVersion = "n2.7-24-g58b28fc";
 
 @interface IJKFFMoviePlayerController()
 
-@property(nonatomic, readonly) NSDictionary *mediaMeta;
-@property(nonatomic, readonly) NSDictionary *videoMeta;
-@property(nonatomic, readonly) NSDictionary *audioMeta;
 
 @end
 

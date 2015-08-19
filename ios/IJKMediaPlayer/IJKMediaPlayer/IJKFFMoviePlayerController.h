@@ -99,6 +99,9 @@ typedef enum IJKLogLevel {
 
 @property(nonatomic, readonly) CGFloat fpsInMeta;
 @property(nonatomic, readonly) CGFloat fpsAtOutput;
+@property(nonatomic, readonly, copy) NSDictionary *mediaMeta;
+@property(nonatomic, readonly, copy) NSDictionary *videoMeta;
+@property(nonatomic, readonly, copy) NSDictionary *audioMeta;
 
 - (void)setOptionValue:(NSString *)value
                 forKey:(NSString *)key
