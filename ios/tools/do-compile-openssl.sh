@@ -89,7 +89,7 @@ FF_GASPP_EXPORT=
 if [ "$FF_ARCH" = "i386" ]; then
     FF_BUILD_NAME="openssl-i386"
     FF_XCRUN_PLATFORM="iPhoneSimulator"
-    FF_XCRUN_OSVERSION="-mios-simulator-version-min=5.1.1"
+    FF_XCRUN_OSVERSION="-mios-simulator-version-min=6.0"
     OPENSSL_CFG_FLAGS="darwin-i386-cc $OPENSSL_CFG_FLAGS"
 elif [ "$FF_ARCH" = "x86_64" ]; then
     FF_BUILD_NAME="openssl-x86_64"
@@ -98,17 +98,17 @@ elif [ "$FF_ARCH" = "x86_64" ]; then
     OPENSSL_CFG_FLAGS="darwin64-x86_64-cc $OPENSSL_CFG_FLAGS"
 elif [ "$FF_ARCH" = "armv7" ]; then
     FF_BUILD_NAME="openssl-armv7"
-    FF_XCRUN_OSVERSION="-miphoneos-version-min=5.1.1"
+    FF_XCRUN_OSVERSION="-miphoneos-version-min=6.0"
     OPENSSL_CFG_FLAGS="$OPENSSL_CFG_FLAGS_ARM $OPENSSL_CFG_FLAGS"
 #    OPENSSL_CFG_CPU="--cpu=cortex-a8"
 elif [ "$FF_ARCH" = "armv7s" ]; then
     FF_BUILD_NAME="openssl-armv7s"
     OPENSSL_CFG_CPU="--cpu=swift"
-    FF_XCRUN_OSVERSION="-miphoneos-version-min=5.1.1"
+    FF_XCRUN_OSVERSION="-miphoneos-version-min=6.0"
     OPENSSL_CFG_FLAGS="$OPENSSL_CFG_FLAGS_ARM $OPENSSL_CFG_FLAGS"
 elif [ "$FF_ARCH" = "arm64" ]; then
     FF_BUILD_NAME="openssl-arm64"
-    FF_XCRUN_OSVERSION="-miphoneos-version-min=5.1.1"
+    FF_XCRUN_OSVERSION="-miphoneos-version-min=6.0"
     OPENSSL_CFG_FLAGS="$OPENSSL_CFG_FLAGS_ARM $OPENSSL_CFG_FLAGS"
     FF_GASPP_EXPORT="GASPP_FIX_XCODE5=1"
 else
@@ -140,7 +140,7 @@ FF_XCRUN_CC="xcrun -sdk $FF_XCRUN_SDK clang"
 export CROSS_TOP="$FF_XCRUN_SDK_PLATFORM_PATH/Developer"
 export CROSS_SDK=`echo ${FF_XCRUN_SDK_PATH/#$CROSS_TOP\/SDKs\//}`
 export BUILD_TOOL="$FF_XCRUN_DEVELOPER"
-export CC="$FF_XCRUN_CC -arch $FF_ARCH $FF_XCRUN_OSVERSION"
+export CC="$FF_XCRUN_CC -arch $FF_ARCH $FF_XCRUN_OSVERSION -fembed-bitcode"
 
 echo "build_source: $FF_BUILD_SOURCE"
 echo "build_prefix: $FF_BUILD_PREFIX"
