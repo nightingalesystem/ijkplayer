@@ -27,14 +27,14 @@
 #include <CoreGraphics/CGBase.h>
 
 struct IJKFraction {
-    NSInteger numerator;
-    NSInteger denominator;
+    int64_t numerator;
+    int64_t denominator;
 };
 typedef struct IJKFraction IJKFraction;
 
 extern const IJKFraction IJKFractionZero;
 
-static inline IJKFraction IJKFractionMake(NSInteger numerator, NSInteger denominator)
+static inline IJKFraction IJKFractionMake(int64_t numerator, int64_t denominator)
 {
     IJKFraction f; f.numerator = numerator; f.denominator = denominator; return f;
 }

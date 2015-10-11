@@ -32,7 +32,7 @@
     NSMutableDictionary *_swsOptions;
 }
 
-+ (IJKFFOptions *)optionsByDefault
++ (IJKFFOptions *)defaultOptions
 {
     IJKFFOptions *options = [[IJKFFOptions alloc] init];
 
@@ -175,6 +175,18 @@
 {
     [self setPlayerOptionIntValue:value forKey:@"framedrop"];
 }
+
+-(void)setMaxBufferSizeInBytes:(int)value
+{
+    [self setPlayerOptionIntValue:value forKey:@"max-buffer-size"];
+}
+
+-(void)setPacketBufferingEnabled:(BOOL)value
+{
+    [self setPlayerOptionIntValue:(value ? 1 : 0) forKey:@"packet-buffering"];
+}
+
+
 
 -(void)setVideoPictureSize:(int)value
 {

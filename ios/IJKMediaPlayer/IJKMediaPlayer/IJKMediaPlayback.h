@@ -22,7 +22,28 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <MediaPlayer/MediaPlayer.h>
+
+
+
+typedef NS_ENUM(NSInteger, IJKMoviePlaybackState) {
+    IJKMoviePlaybackStateStopped,
+    IJKMoviePlaybackStatePlaying,
+    IJKMoviePlaybackStatePaused,
+    IJKMoviePlaybackStateInterrupted,
+    IJKMoviePlaybackStateSeeking
+};
+typedef NS_OPTIONS(NSUInteger, IJKMovieLoadState) {
+    IJKMovieLoadStateUnknown        = 0,
+    IJKMovieLoadStatePlayable       = 1 << 0,
+    IJKMovieLoadStatePlaythroughOK  = 1 << 1, // Playback will be automatically started in this state when shouldAutoplay is YES
+    IJKMovieLoadStateStalled        = 1 << 2, // Playback will be automatically paused in this state, if started
+};
+typedef NS_ENUM(NSInteger, IJKMovieFinishReason) {
+    IJKMovieFinishReasonPlaybackEnded,
+    IJKMovieFinishReasonPlaybackError,
+    IJKMovieFinishReasonUserExited
+};
+
 
 
 @protocol IJKMediaPlayback;
@@ -47,13 +68,12 @@
 @property(nonatomic, readonly)  NSInteger bufferingProgress;
 
 @property(nonatomic, readonly)  BOOL isPreparedToPlay;
-@property(nonatomic, readonly)  MPMoviePlaybackState playbackState;
-@property(nonatomic, readonly)  MPMovieLoadState loadState;
+@property(nonatomic, readonly)  IJKMoviePlaybackState playbackState;
+@property(nonatomic, readonly)  IJKMovieLoadState loadState;
 
 @property(nonatomic, readonly) int64_t numberOfBytesTransferred;
 
-@property(nonatomic) MPMovieControlStyle controlStyle;
-@property(nonatomic) MPMovieScalingMode scalingMode;
+@property(nonatomic) UIViewContentMode contentMode;
 @property(nonatomic) BOOL shouldAutoplay;
 
 @property (nonatomic) BOOL allowsMediaAirPlay;
@@ -78,6 +98,9 @@ IJK_EXTERN NSString *const IJKMoviePlayerPlaybackStateDidChangeNotification;
 
 IJK_EXTERN NSString *const IJKMoviePlayerIsAirPlayVideoActiveDidChangeNotification;
 IJK_EXTERN NSString *const IJKMoviePlayerVideoDecoderOpenNotification;
+
+IJK_EXTERN NSString *const IJKMoviePlayerPlaybackDidFinishReasonUserInfoKey;
+
 @end
 
 #pragma mark IJKMediaResource

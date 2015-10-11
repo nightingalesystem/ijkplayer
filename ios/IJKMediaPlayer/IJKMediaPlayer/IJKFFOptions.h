@@ -45,7 +45,7 @@ struct IjkMediaPlayer;
 
 @interface IJKFFOptions : NSObject
 
-+(IJKFFOptions *)optionsByDefault;
++(IJKFFOptions *)defaultOptions;
 
 -(void)applyTo:(struct IjkMediaPlayer *)mediaPlayer;
 
@@ -70,6 +70,9 @@ struct IjkMediaPlayer;
 
 -(void)setMaxFps:(int)value;
 -(void)setFrameDrop:(int)value;
+-(void)setMaxBufferSizeInBytes:(int)value;
+-(void)setPacketBufferingEnabled:(BOOL)value;
+
 -(void)setVideoPictureSize:(int)value;
 -(void)setVideoToolboxEnabled:(BOOL)value;
 -(void)setVideoToolboxMaxFrameWidth:(int)value;

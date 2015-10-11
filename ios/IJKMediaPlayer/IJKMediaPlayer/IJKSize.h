@@ -1,5 +1,5 @@
 /*
- * IJKIntSize.m
+ * IJKSize.h
  *
  * Copyright (c) 2013-2015 Zhang Rui <bbcallen@gmail.com>
  *
@@ -20,6 +20,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#import "IJKIntSize.h"
 
-const IJKIntSize IJKIntSizeZero = (IJKIntSize){0,0};
+#ifndef IJKSize_h
+#define IJKSize_h
+
+#include <CoreGraphics/CGGeometry.h>
+
+struct IJKSize {
+    int64_t width;
+    int64_t height;
+};
+typedef struct IJKSize IJKSize;
+
+extern const IJKSize IJKSizeZero;
+
+static inline IJKSize IJKSizeMake(int64_t width, int64_t height)
+{
+    IJKSize s; s.width = width; s.height = height; return s;
+}
+
+static inline CGSize CGSizeFromIJKSize(IJKSize size)
+{
+    CGSize s; s.width = (CGFloat)size.width; s.height = (CGFloat)size.height; return s;
+}
+
+#endif

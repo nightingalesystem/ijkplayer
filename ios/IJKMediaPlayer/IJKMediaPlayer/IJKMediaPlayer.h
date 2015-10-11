@@ -21,11 +21,8 @@
  */
 
 #import "IJKMediaPlayback.h"
-#import "IJKMPMoviePlayerController.h"
 
 #import "IJKFFOptions.h"
 #import "IJKFFMoviePlayerController.h"
-
-#import "IJKAVMoviePlayerController.h"
 
 #import "IJKMediaModule.h"
