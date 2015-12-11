@@ -1,1 +1,1 @@
-module-custom.sh
+module-minimal.sh

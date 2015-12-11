@@ -1,0 +1,11 @@
+alsa
+caca
+decklink
+fbdev
+opengl
+oss
+pulse
+sdl
+sndio
+v4l2
+xv
