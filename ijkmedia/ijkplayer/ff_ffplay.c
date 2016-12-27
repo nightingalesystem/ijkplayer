@@ -895,11 +895,12 @@ static void stream_toggle_pause_l(FFPlayer *ffp, int pause_on)
 static void stream_update_pause_l(FFPlayer *ffp)
 {
     VideoState *is = ffp->is;
-    if (!is->step && (is->pause_req || is->buffering_on)) {
-        stream_toggle_pause_l(ffp, 1);
-    } else {
-        stream_toggle_pause_l(ffp, 0);
-    }
+    stream_toggle_pause_l(ffp, 0);
+//    if (!is->step && (is->pause_req || is->buffering_on)) {
+//        stream_toggle_pause_l(ffp, 0);
+//    } else {
+//        stream_toggle_pause_l(ffp, 0);
+//    }
 }
 
 static void toggle_pause_l(FFPlayer *ffp, int pause_on)
@@ -3606,7 +3607,7 @@ void ffp_check_buffering_l(FFPlayer *ffp)
             hwm_in_ms = ffp->max_high_water_mark_in_ms;
 
         ffp->current_high_water_mark_in_ms = hwm_in_ms;
-
+        
         if (is->buffer_indicator_queue && is->buffer_indicator_queue->nb_packets > 0) {
             if (   (is->audioq.nb_packets > 5 || is->audio_stream < 0 || is->audioq.abort_request)
                 && (is->videoq.nb_packets > 5 || is->video_stream < 0 || is->videoq.abort_request)) {

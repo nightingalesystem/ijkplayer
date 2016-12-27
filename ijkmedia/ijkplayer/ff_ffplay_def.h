@@ -66,7 +66,7 @@
 #include "ff_ffpipenode.h"
 #include "ijkmeta.h"
 
-#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (256 * 1024)
+#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (256 * 1024) // 256 * 1024
 
 /*
  * START: buffering after prepared/seeked
@@ -74,17 +74,17 @@
  * MAX:   ...
  */
 #define DEFAULT_START_HIGH_WATER_MARK_IN_MS     (100)
-#define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1 * 1000)
-#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (5 * 1000)
+#define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1000)  // 1 * 1000
+#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (1000) // 5 * 1000
 
-#define BUFFERING_CHECK_PER_BYTES               (512)
-#define BUFFERING_CHECK_PER_MILLISECONDS        (500)
+//#define BUFFERING_CHECK_PER_BYTES               (1024)  // 512
+#define BUFFERING_CHECK_PER_MILLISECONDS        (1)  // 200
 
-#define MAX_QUEUE_SIZE (15 * 1024 * 1024)
+#define MAX_QUEUE_SIZE (15 * 1024 * 1024) // 15 * 1024 * 1024
 #ifdef FFP_MERGE
-#define MIN_FRAMES 25
+#define MIN_FRAMES 3 // 25
 #endif
-#define MIN_FRAMES 50000
+#define MIN_FRAMES 3000 // 50000
 #define EXTERNAL_CLOCK_MIN_FRAMES 2
 #define EXTERNAL_CLOCK_MAX_FRAMES 10
 
@@ -632,7 +632,6 @@ inline static void ffp_reset_internal(FFPlayer *ffp)
     ffp->error                  = 0;
     ffp->error_count            = 0;
     ffp->start_on_prepared      = 1;
-
     ffp->max_buffer_size                = MAX_QUEUE_SIZE;
     ffp->high_water_mark_in_bytes       = DEFAULT_HIGH_WATER_MARK_IN_BYTES;
 
@@ -640,10 +639,9 @@ inline static void ffp_reset_internal(FFPlayer *ffp)
     ffp->next_high_water_mark_in_ms     = DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS;
     ffp->max_high_water_mark_in_ms      = DEFAULT_MAX_HIGH_WATER_MARK_IN_MS;
     ffp->current_high_water_mark_in_ms  = DEFAULT_START_HIGH_WATER_MARK_IN_MS;
-
     ffp->playable_duration_ms           = 0;
 
-    ffp->packet_buffering               = 1;
+    ffp->packet_buffering               = 0;
     ffp->pictq_size                     = VIDEO_PICTURE_QUEUE_SIZE_DEFAULT; // option
     ffp->max_fps                        = 31; // option
 
