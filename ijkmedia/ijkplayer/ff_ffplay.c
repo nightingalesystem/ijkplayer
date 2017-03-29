@@ -895,11 +895,12 @@ static void stream_toggle_pause_l(FFPlayer *ffp, int pause_on)
 static void stream_update_pause_l(FFPlayer *ffp)
 {
     VideoState *is = ffp->is;
-    if (!is->step && (is->pause_req || is->buffering_on)) {
-        stream_toggle_pause_l(ffp, 1);
-    } else {
-        stream_toggle_pause_l(ffp, 0);
-    }
+    stream_toggle_pause_l(ffp, 0);
+//    if (!is->step && (is->pause_req || is->buffering_on)) {
+//        stream_toggle_pause_l(ffp, 1);
+//    } else {
+//        stream_toggle_pause_l(ffp, 0);
+//    }
 }
 
 static void toggle_pause_l(FFPlayer *ffp, int pause_on)
