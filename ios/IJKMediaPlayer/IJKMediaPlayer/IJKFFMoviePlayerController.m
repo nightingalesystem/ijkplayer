@@ -591,7 +591,7 @@ inline static void fillMetaInternal(NSMutableDictionary *meta, IjkMediaMeta *raw
                 fillMetaInternal(newMediaMeta, rawMeta, IJKM_KEY_AUDIO_STREAM, nil);
 
                 int64_t video_stream = ijkmeta_get_int64_l(rawMeta, IJKM_KEY_VIDEO_STREAM, -1);
-                int64_t audio_stream = ijkmeta_get_int64_l(rawMeta, IJKM_KEY_AUDIO_STREAM, -1);
+//                int64_t audio_stream = ijkmeta_get_int64_l(rawMeta, IJKM_KEY_AUDIO_STREAM, -1);
 
                 NSMutableArray *streams = [[NSMutableArray alloc] init];
 
@@ -645,15 +645,16 @@ inline static void fillMetaInternal(NSMutableDictionary *meta, IjkMediaMeta *raw
                                     }
                                 }
 
-                            } else if (0 == strcmp(type, IJKM_VAL_TYPE__AUDIO)) {
-                                fillMetaInternal(streamMeta, streamRawMeta, IJKM_KEY_SAMPLE_RATE, nil);
-                                fillMetaInternal(streamMeta, streamRawMeta, IJKM_KEY_CHANNEL_LAYOUT, nil);
-
-                                if (audio_stream == i) {
-                                    _audioMeta = streamMeta;
-                                }
-
                             }
+//                                else if (0 == strcmp(type, IJKM_VAL_TYPE__AUDIO)) {
+//                                fillMetaInternal(streamMeta, streamRawMeta, IJKM_KEY_SAMPLE_RATE, nil);
+//                                fillMetaInternal(streamMeta, streamRawMeta, IJKM_KEY_CHANNEL_LAYOUT, nil);
+//
+//                                if (audio_stream == i) {
+//                                    _audioMeta = streamMeta;
+//                                }
+//
+//                            }
                         }
                     }
 
