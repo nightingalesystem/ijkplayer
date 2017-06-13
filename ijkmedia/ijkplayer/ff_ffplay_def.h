@@ -66,7 +66,7 @@
 #include "ff_ffpipenode.h"
 #include "ijkmeta.h"
 
-#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (256 * 1024)
+#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (128 * 1024) // 256
 
 /*
  * START: buffering after prepared/seeked
@@ -75,16 +75,16 @@
  */
 #define DEFAULT_START_HIGH_WATER_MARK_IN_MS     (100)
 #define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1 * 1000)
-#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (5000)
+#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (5 * 1000)
 
-//#define BUFFERING_CHECK_PER_BYTES               (1024)
-#define BUFFERING_CHECK_PER_MILLISECONDS        (1)
+#define BUFFERING_CHECK_PER_BYTES               (512)
+#define BUFFERING_CHECK_PER_MILLISECONDS        (500)
 
-#define MAX_QUEUE_SIZE (10 * 1024 * 1024)
+#define MAX_QUEUE_SIZE (3 * 1024 * 1024)
 #ifdef FFP_MERGE
-#define MIN_FRAMES 3
+#define MIN_FRAMES 10 // 25
 #endif
-#define MIN_FRAMES 1000
+#define MIN_FRAMES 5 // 50000
 #define EXTERNAL_CLOCK_MIN_FRAMES 2
 #define EXTERNAL_CLOCK_MAX_FRAMES 10
 
@@ -581,13 +581,13 @@ inline static void ffp_reset_internal(FFPlayer *ffp)
 
     /* ffplay options specified by the user */
     av_freep(&ffp->input_filename);
-    ffp->audio_disable          = 0;
+    ffp->audio_disable          = 1;
     ffp->video_disable          = 0;
     memset(ffp->wanted_stream_spec, 0, sizeof(ffp->wanted_stream_spec));
     ffp->seek_by_bytes          = -1;
     ffp->display_disable        = 0;
     ffp->show_status            = 0;
-    ffp->av_sync_type           = AV_SYNC_AUDIO_MASTER;
+    ffp->av_sync_type           = AV_SYNC_VIDEO_MASTER; // AV_SYNC_AUDIO_MASTER;
     ffp->start_time             = AV_NOPTS_VALUE;
     ffp->duration               = AV_NOPTS_VALUE;
     ffp->fast                   = 1;
@@ -643,7 +643,7 @@ inline static void ffp_reset_internal(FFPlayer *ffp)
 
     ffp->playable_duration_ms           = 0;
 
-    ffp->packet_buffering               = 0;
+    ffp->packet_buffering               = 1;
     ffp->pictq_size                     = VIDEO_PICTURE_QUEUE_SIZE_DEFAULT; // option
     ffp->max_fps                        = 31; // option
 

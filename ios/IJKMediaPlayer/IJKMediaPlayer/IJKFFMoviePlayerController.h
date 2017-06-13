@@ -28,6 +28,7 @@
 typedef enum IJKLogLevel {
     k_IJK_LOG_UNKNOWN = 0,
     k_IJK_LOG_DEFAULT = 1,
+
     k_IJK_LOG_VERBOSE = 2,
     k_IJK_LOG_DEBUG   = 3,
     k_IJK_LOG_INFO    = 4,
