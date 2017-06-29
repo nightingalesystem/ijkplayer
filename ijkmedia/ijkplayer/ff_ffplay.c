@@ -907,7 +907,7 @@ static void toggle_pause_l(FFPlayer *ffp, int pause_on)
     VideoState *is = ffp->is;
     is->pause_req = pause_on;
     ffp->auto_resume = !pause_on;
-    stream_update_pause_l(ffp);
+    // stream_update_pause_l(ffp);
     is->step = 0;
 }
 
@@ -1075,8 +1075,8 @@ display:
             SDL_LockMutex(ffp->is->play_mutex);
             if (is->step) {
                 is->step = 0;
-                if (!is->paused)
-                    stream_update_pause_l(ffp);
+                // if (!is->paused)
+                //     stream_update_pause_l(ffp);
             }
             SDL_UnlockMutex(ffp->is->play_mutex);
         }
@@ -2613,7 +2613,7 @@ static int read_thread(void *arg)
                 if (ffp->packet_buffering)
                     is->buffering_on = 1;
                 ffp->auto_resume = 0;
-                stream_update_pause_l(ffp);
+                // stream_update_pause_l(ffp);
             }
             if (is->pause_req)
                 step_to_next_frame_l(ffp);
@@ -3478,12 +3478,12 @@ void ffp_toggle_buffering_l(FFPlayer *ffp, int buffering_on)
     if (buffering_on && !is->buffering_on) {
         av_log(ffp, AV_LOG_DEBUG, "ffp_toggle_buffering_l: start\n");
         is->buffering_on = 1;
-        stream_update_pause_l(ffp);
+        // stream_update_pause_l(ffp);
         ffp_notify_msg1(ffp, FFP_MSG_BUFFERING_START);
     } else if (!buffering_on && is->buffering_on){
         av_log(ffp, AV_LOG_DEBUG, "ffp_toggle_buffering_l: end\n");
         is->buffering_on = 0;
-        stream_update_pause_l(ffp);
+        // stream_update_pause_l(ffp);
         ffp_notify_msg1(ffp, FFP_MSG_BUFFERING_END);
     }
 }
