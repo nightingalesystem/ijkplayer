@@ -361,8 +361,8 @@ static int packet_queue_get(PacketQueue *q, AVPacket *pkt, int block, int *seria
 static int packet_queue_get_or_buffering(FFPlayer *ffp, PacketQueue *q, AVPacket *pkt, int *serial, int *finished)
 {
     assert(finished);
-//    if (!ffp->packet_buffering)
-//        return packet_queue_get(q, pkt, 1, serial);
+    // if (!ffp->packet_buffering)
+    //     return packet_queue_get(q, pkt, 1, serial);
 
     while (1) {
         int new_packet = packet_queue_get(q, pkt, 1, serial);
