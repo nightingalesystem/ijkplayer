@@ -969,7 +969,6 @@ static double vp_duration(VideoState *is, Frame *vp, Frame *nextvp) {
     } else {
         return 0.0;
     }
-    return vp->duration;
 }
 
 static void update_video_pts(VideoState *is, double pts, int64_t pos, int serial) {
