@@ -3634,7 +3634,7 @@ void ffp_check_buffering_l(FFPlayer *ffp)
 
         if (is->buffer_indicator_queue && is->buffer_indicator_queue->nb_packets > 0) {
             if (   (is->audioq.nb_packets > 5 || is->audio_stream < 0 || is->audioq.abort_request)
-             && (is->videoq.nb_packets > 5 || is->video_stream < 0 || is->videoq.abort_request)) {
+                && (is->videoq.nb_packets > 5 || is->video_stream < 0 || is->videoq.abort_request)) {
                 ffp_toggle_buffering(ffp, 0);
             }
         }
