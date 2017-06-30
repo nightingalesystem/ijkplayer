@@ -66,6 +66,7 @@
 #include "ff_ffpipenode.h"
 #include "ijkmeta.h"
 
+// IJKPlayer only resumes from stalled buffering when it reads following buffer size
 #define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (128 * 1024) // 256
 
 /*
@@ -74,17 +75,21 @@
  * MAX:   ...
  */
 #define DEFAULT_START_HIGH_WATER_MARK_IN_MS     (100)
+// increment buffering time by 1 sec
 #define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1 * 1000)
-#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (5 * 1000)
+// set max buffering time to 3 sec
+#define DEFAULT_MAX_HIGH_WATER_MARK_IN_MS       (3 * 1000)
 
 #define BUFFERING_CHECK_PER_BYTES               (512)
-#define BUFFERING_CHECK_PER_MILLISECONDS        (500)
-
-#define MAX_QUEUE_SIZE (3 * 1024 * 1024)
+#define BUFFERING_CHECK_PER_MILLISECONDS        (50000)
+// max buffer size should be pre-read
+#define MAX_QUEUE_SIZE (1 * 1024 * 1024)
 #ifdef FFP_MERGE
-#define MIN_FRAMES 10 // 25
+// minimal frames to stop pre-reading
+#define MIN_FRAMES 5 //25
 #endif
-#define MIN_FRAMES 5 // 50000
+// minimal frames to stop pre-reading
+#define MIN_FRAMES 5 //50000
 #define EXTERNAL_CLOCK_MIN_FRAMES 2
 #define EXTERNAL_CLOCK_MAX_FRAMES 10
 
