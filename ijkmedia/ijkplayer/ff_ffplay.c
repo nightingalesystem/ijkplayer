@@ -1961,6 +1961,7 @@ static void sdl_audio_callback(void *opaque, Uint8 *stream, int len)
     }
 }
 
+// unused function
 static int audio_open(FFPlayer *opaque, int64_t wanted_channel_layout, int wanted_nb_channels, int wanted_sample_rate, struct AudioParams *audio_hw_params)
 {
     FFPlayer *ffp = opaque;
@@ -2338,6 +2339,10 @@ static int read_thread(void *arg)
         av_dict_set(&ffp->format_opts, "scan_all_pmts", "1", AV_DICT_DONT_OVERWRITE);
         scan_all_pmts_set = 1;
     }
+    
+    // set Maximum duration of the data read from input in avformat_find_stream_info()
+    ic->max_analyze_duration2 = 3 * 1000 * 1000;
+    
     if (ffp->format_control_message) {
         av_format_set_control_message_cb(ic, ffp_format_control_message);
         av_format_set_opaque(ic, ffp);
@@ -2347,6 +2352,10 @@ static int read_thread(void *arg)
         // There is total different meaning for 'timeout' option in rtmp
         av_log(ffp, AV_LOG_WARNING, "remove 'timeout' option for rtmp.\n");
         av_dict_set(&ffp->format_opts, "timeout", NULL, 0);
+        // fore rtsp, timeout to wait for incoming connections.
+        // av_dict_set(&ffp->format_opts, "initial_timeout", "5000000", 0);
+        // timeout of socket i/o operations
+        // av_dict_set(&ffp->format_opts, "stimeout", "500000", 0); //us
     }
     err = avformat_open_input(&ic, is->filename, is->iformat, &ffp->format_opts);
     if (err < 0) {
@@ -2365,7 +2374,10 @@ static int read_thread(void *arg)
 #endif
     }
     is->ic = ic;
-
+    // When receiving data over UDP, the demuxer tries to reorder received packets. This can be disabled by setting
+    // the maximum demuxing delay to zero
+    ic->max_delay = 5000;
+    
     if (ffp->genpts)
         ic->flags |= AVFMT_FLAG_GENPTS;
 
@@ -2654,9 +2666,12 @@ static int read_thread(void *arg)
                 ffp_toggle_buffering(ffp, 0);
             }
             /* wait 10 ms */
+            /* testing: dont wait for 10 ms when queue is full
             SDL_LockMutex(wait_mutex);
+            // wait until continue_read_thread is signaled or 10 ms has passed.
             SDL_CondWaitTimeout(is->continue_read_thread, wait_mutex, 10);
             SDL_UnlockMutex(wait_mutex);
+            */
             continue;
         }
         if ((!is->paused || completed) &&
@@ -3537,17 +3552,22 @@ void ffp_check_buffering_l(FFPlayer *ffp)
 #endif
         }
 
-        is->audioq_duration = audio_cached_duration;
+        // only check video cache
+        // is->audioq_duration = audio_cached_duration;
         is->videoq_duration = video_cached_duration;
-
+        /*
         if (video_cached_duration > 0 && audio_cached_duration > 0) {
             cached_duration_in_ms = (int)IJKMIN(video_cached_duration, audio_cached_duration);
-        } else if (video_cached_duration > 0) {
+        } else
+        */
+        if (video_cached_duration > 0) {
             cached_duration_in_ms = (int)video_cached_duration;
-        } else if (audio_cached_duration > 0) {
+        }
+        /*
+        else if (audio_cached_duration > 0) {
             cached_duration_in_ms = (int)audio_cached_duration;
         }
-
+        */
         if (cached_duration_in_ms >= 0) {
             buf_time_position = ffp_get_current_position_l(ffp) + cached_duration_in_ms;
             ffp->playable_duration_ms = buf_time_position;
@@ -3604,7 +3624,12 @@ void ffp_check_buffering_l(FFPlayer *ffp)
 
         if (hwm_in_ms > ffp->max_high_water_mark_in_ms)
             hwm_in_ms = ffp->max_high_water_mark_in_ms;
-
+        
+        // set maximum high water mark to 3 seconds
+        if (hwm_in_ms > 3000) {
+            hwm_in_ms = 3000;
+        }
+        
         ffp->current_high_water_mark_in_ms = hwm_in_ms;
 
         if (is->buffer_indicator_queue && is->buffer_indicator_queue->nb_packets > 0) {

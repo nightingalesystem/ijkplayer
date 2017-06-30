@@ -37,7 +37,7 @@
     IJKFFOptions *options = [[IJKFFOptions alloc] init];
 
     [options setMaxFps:30];
-    [options setFrameDrop:0];
+    [options setFrameDrop:5];
     [options setVideoPictureSize:3];
     [options setVideoToolboxMaxFrameWidth:960];
 
@@ -45,6 +45,10 @@
     [options setTimeout:30 * 1000 * 1000];
     [options setUserAgent:@"ijkplayer"];
 
+    [options setPlayerOptionIntValue:3000 forKey:@"max_frame_duration"];
+    [options setFormatOptionIntValue:8192 forKey:@"probsize"];
+    [options setPlayerOptionIntValue:50000 forKey:@"analyzeduration"];
+    
     [options setSkipLoopFilter:IJK_AVDISCARD_ALL];
     [options setSkipFrame:IJK_AVDISCARD_NONREF];
 
@@ -203,7 +207,6 @@
     [self setPlayerOptionIntValue:value forKey:@"videotoolbox-max-frame-width"];
 }
 
-
 #pragma mark Format options
 
 -(void)setReconnect:(int)value
@@ -220,7 +223,6 @@
 {
     [self setFormatOptionValue:value forKey:@"user-agent"];
 }
-
 
 #pragma mark Codec options
 
