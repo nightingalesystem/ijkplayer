@@ -45,8 +45,8 @@
     [options setTimeout:30 * 1000 * 1000];
     [options setUserAgent:@"ijkplayer"];
 
-    [options setFormatOptionIntValue:8192 forKey:@"probsize"];
-    [options setPlayerOptionIntValue:50000 forKey:@"analyzeduration"];
+//    [options setFormatOptionIntValue:8192 forKey:@"probsize"];
+//    [options setPlayerOptionIntValue:50000 forKey:@"analyzeduration"];
     
     [options setSkipLoopFilter:IJK_AVDISCARD_ALL];
     [options setSkipFrame:IJK_AVDISCARD_NONREF];
