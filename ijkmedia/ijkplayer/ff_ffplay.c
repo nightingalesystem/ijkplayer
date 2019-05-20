@@ -343,8 +343,8 @@ static int packet_queue_get_or_buffering(FFPlayer *ffp, PacketQueue *q, AVPacket
         if (new_packet < 0)
             return -1;
         else if (new_packet == 0) {
-            if (q->is_buffer_indicator && !*finished)
-                ffp_toggle_buffering(ffp, 1);
+            // if (q->is_buffer_indicator && !*finished)
+            //     ffp_toggle_buffering(ffp, 1);
             new_packet = packet_queue_get(q, pkt, 1, serial);
             if (new_packet < 0)
                 return -1;
@@ -3365,9 +3365,10 @@ static int read_thread(void *arg)
                 ffp_toggle_buffering(ffp, 0);
             }
             /* wait 10 ms */
-            SDL_LockMutex(wait_mutex);
-            SDL_CondWaitTimeout(is->continue_read_thread, wait_mutex, 10);
-            SDL_UnlockMutex(wait_mutex);
+            // Jenwei test
+            // SDL_LockMutex(wait_mutex);
+            // SDL_CondWaitTimeout(is->continue_read_thread, wait_mutex, 10);
+            // SDL_UnlockMutex(wait_mutex);
             continue;
         }
         if ((!is->paused || completed) &&

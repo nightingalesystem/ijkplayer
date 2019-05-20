@@ -39,7 +39,8 @@
     IJKFFOptions *options = [[IJKFFOptions alloc] init];
 
     [options setPlayerOptionIntValue:30     forKey:@"max-fps"];
-    [options setPlayerOptionIntValue:0      forKey:@"framedrop"];
+    // [options setPlayerOptionIntValue:0      forKey:@"framedrop"];
+    [options setPlayerOptionIntValue:1      forKey:@"framedrop"];
     [options setPlayerOptionIntValue:3      forKey:@"video-pictq-size"];
     [options setPlayerOptionIntValue:0      forKey:@"videotoolbox"];
     [options setPlayerOptionIntValue:960    forKey:@"videotoolbox-max-frame-width"];
@@ -49,6 +50,12 @@
     [options setFormatOptionIntValue:30 * 1000 * 1000   forKey:@"timeout"];
     [options setFormatOptionValue:@"ijkplayer"          forKey:@"user-agent"];
 
+    // jenwei test
+    // [options setFormatOptionIntValue:5000000 forKey:@"initial_timeout"];
+    // [options setFormatOptionIntValue:500000 forKey:@"stimeout"];
+    // [options setFormatOptionIntValue:10000 forKey:@"max_delay"];
+    // [options setFormatOptionIntValue:300 forKey:@"probesize"];
+    
     options.showHudView   = NO;
 
     return options;
